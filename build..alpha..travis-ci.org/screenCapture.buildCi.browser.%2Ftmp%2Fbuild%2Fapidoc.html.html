@@ -341,7 +341,24 @@
     }
     return parse_tree
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    index_access: /^\[(\d+)\]/,
+    sign: /^[\+\-]/
+}
+
+function sprintf() {
+    var key = arguments[0], cache = sprintf.cache
+    if (!(cache[key] &amp;&amp; cache.hasOwnProperty(key))) {
+        cache[key] = sprintf.<span class="apidocCodeKeywordSpan">parse</span>(key)
+    }
+    return sprintf.format.call(null, cache[key], arguments)
+}
+
+sprintf.format = function(parse_tree, argv) {
+    var cursor = 1, tree_length = parse_tree.length, node_type = "", arg, output = [], i, k, match, pad, pad_character
+, pad_length, is_positive = true, sign = ""
+    for (i = 0; i &lt; tree_length; i++) {
+...</pre></li>
     </ul>
 
 
